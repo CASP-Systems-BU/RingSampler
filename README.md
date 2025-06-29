@@ -92,5 +92,6 @@ Before running, make sure to:
 ### Preview of RingSampler  
 
 Here is the diagram that visualize the implementation:
-<img width="881" alt="Screenshot 2024-09-22 at 2 48 13 AM" src="https://github.com/user-attachments/assets/aed8117e-ce0e-4c8f-b686-c31700a1e024">
+<img width="871" alt="workflow_v2" src="https://github.com/user-attachments/assets/3b38f133-960c-42c4-aec1-4ca85bdb67de" />
+
 
