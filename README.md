@@ -1,6 +1,6 @@
 # RingSampler: GNN sampling on large-scale graphs with io_uring
 
-This repository includes the implementation of RingSampler described in the [HotStorage '25 paper](https://dl.acm.org/doi/10.1145/3736548.3737829) by Qixuan Chen, Yuhang Song, Melissa Martinez, Vasiliki Kalavri.
+This repository includes the implementation of RingSampler described in the [HotStorage '25 paper](https://dl.acm.org/doi/10.1145/3736548.3737829).
 
 You can cite the paper using the BibTeX below:
 
