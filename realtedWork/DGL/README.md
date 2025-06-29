@@ -37,35 +37,15 @@ See this DGL [guide](https://docs.dgl.ai/api/python/dgl.graphbolt.html#dataset) 
 
 ## Run
 
-We focus on DGL sampling with GraphBolt
-
 ```
+# make sure you correct the path to the datasets of the dataloders (`data_loader.py`) before you run
+
 # run DGL graphBolt Sampler
 python sampling-graphBolt.py --dataset --mode
 
 # run DGL Normal Sampler
 python sampling.py --mode
 ```
-
-## Results
-
-### Average sampling time of 1 epoch: batch_size=1024, fanout=[20 15 10]
-Sampling mode
-- cpu: store and perform sampling on CPU
-- mixed: store dataset in CPU, use UVA to tranfer graph data to GPU for sampling
-- gpu: store and perform sampling on GPU
-
-### ogbn-papers100m
-
-| Sampling Mode   | cpu | mixed  | gpu | 
-| ------------- |:---------:| :-----:| :-----:| 
-| avg runtime(s)| 5.365625	| 7.235 | 2.3615 |
-
-### Friendster
-
-| Sampling Mode   | cpu | mixed  | gpu | 
-| ------------- |:---------:| :-----:| :-----:| 
-| avg runtime(s)| 5.90755	| 5.3602 | 1.7266 |
 
 ### Acknowledge
 The code is referring to the examples from [DGL branch 2.3.x](https://github.com/dmlc/dgl/tree/2.3.x). Links to orignal code are attached to the beginning of each file. 

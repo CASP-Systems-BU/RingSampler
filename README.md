@@ -1,4 +1,28 @@
-# RingSampler
+# RingSampler: GNN sampling on large-scale graphs with io_uring
+
+This repository includes the implementation of RingSampler described in the [HotStorage '25 paper](https://dl.acm.org/doi/10.1145/3736548.3737829) by Qixuan Chen, Yuhang Song, Melissa Martinez, Vasiliki Kalavri.
+
+You can cite the paper using the BibTeX below:
+
+```
+@inproceedings{10.1145/3736548.3737829,
+author = {Chen, Qixuan and Song, Yuhang and Martinez, Melissa and Kalavri, Vasiliki},
+title = {RingSampler: GNN sampling on large-scale graphs with io_uring},
+year = {2025},
+isbn = {9798400719479},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3736548.3737829},
+doi = {10.1145/3736548.3737829},
+abstract = {Neighborhood sampling is a critical computation step in graph learning with Graph Neural Networks (GNNs), often accounting for the majority of the training time. To mitigate this bottleneck and scale training to very large graphs, existing approaches offload the sampling computation to GPUs or computational storage, such as SmartSSDs. Given the ubiquity of multi-core CPUs and high-throughput SSDs, we investigate a simpler design that performs CPU-based sampling, making GPU resources fully available to the aggregation stage of training instead. We propose RingSampler, a new GNN sampling system that leverages io_uring to support efficient training of billion-edge graphs on a single machine. RingSampler parallelizes sampling by transparently assigning mini-batches to threads and effectively overlapping computation with I/O operations. Our results show that RingSampler significantly outperforms SmartSSD-based sampling on large graphs and is competitive with GPU-accelerated approaches on graphs that fit in main memory.},
+booktitle = {Proceedings of the 17th ACM Workshop on Hot Topics in Storage and File Systems},
+pages = {52–60},
+numpages = {9},
+keywords = {Graph Neural Networks, Neighborhood sampling, io_uring},
+location = {Boston, MA, USA},
+series = {HotStorage '25}
+}
+```
 
 ## Configuration
 
@@ -17,12 +41,31 @@
 - **CMake:** 3.20.2
 - **liburing:** build from [source](https://github.com/axboe/liburing)
 
-## Build Instructions
+## Build and Running Instructions
 
-### Get and preprocess datasets
+### Repository organization
+- `src/`: Contains the core implementation of RingSampler, including the use of io_uring, asynchronous sampling logic, and supporting utility functions.
+- `preprocess/`: Includes scripts to generate the required binary files (edges.bin, offset.bin, train_nodes.bin) for each dataset from raw text-based input.
+- `tests/`: Contains code to run RingSampler, performing multi-epoch GraphSAGE sampling on various datasets.
+- `scripts/`: Provides example scripts to run sampling on different datasets with configurable parameters.
+
+
+### Download datasets
 - [ogbn-papers100M](https://ogb.stanford.edu/docs/nodeprop/#ogbn-papers100M)
 - [yahoo](https://webscope.sandbox.yahoo.com/catalog.php?datatype=&guccounter=1)
 - [Friendster](https://snap.stanford.edu/data/com-Friendster.html)
+- [Synthetic datasets](https://github.com/RapidsAtHKUST/Graph500KroneckerGraphGenerator)
+
+### Datasets Preprocess
+To perform sampling with RingSampler, each dataset must be preprocessed into the following binary files:
+
+- `edges.bin`: A list of destination node IDs (`uint32_t`)
+- `offset.bin`: Offset indices for each node’s neighbor list (`uint64_t`)
+- `train_nodes.bin`: A list of training node IDs (`uint32_t`)
+
+For a detailed explanation of these files and their structure, please refer to **Section 3.1 (System Overview)** of the paper.
+
+Preprocessing code is provided in the /gnn-sampling/preprocess/, which converts raw .txt edge list formats into the required binary files.
 
 ### Build
 
@@ -34,6 +77,10 @@ make -j
 
 ## Run
 
+Before running, make sure to:
+- Update dataset paths in: `src/utils.h`
+- Set the correct training node count in: `tests/test_multi_epoch.c` (variable: training_nodes)
+
 ```
 # run node-wise sampling for multi-epoch
 ./test_multi_epoch <dataset> <QD> <num_threads> <epoch_num> <batch_size>
@@ -42,29 +89,7 @@ make -j
 ../experiments/nodewise_sampling.sh
 ```
 
-## Results
-
-### Average sampling time of 1 epoch: QD=512, batch_size=1024, fanout=[20 15 10]
-
-### Yahoo
-
-| Thread Number    | 1        | 4  | 8 | 16 | 32 | 64 |
-| ------------- |:-------------:| :-----:| :-----:| :-----:| :-----:| :-----:| 
-| avg runtime(s)| 276.578	| 73.283	| 37.831	| 21.029	| 10.412	| 6.26|
-
-### ogbn-papers100m
-
-| Thread Number    | 1        | 4  | 8 | 16 | 32 | 64 |
-| ------------- |:-------------:| :-----:| :-----:| :-----:| :-----:| :-----:| 
-| avg runtime(s)| 118.011	| 30.571	| 15.793	| 8.863	| 4.381	| 2.609|
-
-### Friendster
-
-| Thread Number    | 1        | 4  | 8 | 16 | 32 | 64 |
-| ------------- |:-------------:| :-----:| :-----:| :-----:| :-----:| :-----:| 
-| avg runtime(s)| 250.499	| 65.035	|33.251	| 18.983	|9.276	|5.415 |
-
-### Preview of io_uring sampling 
+### Preview of RingSampler  
 
 Here is the diagram that visualize the implementation:
 <img width="881" alt="Screenshot 2024-09-22 at 2 48 13 AM" src="https://github.com/user-attachments/assets/aed8117e-ce0e-4c8f-b686-c31700a1e024">
