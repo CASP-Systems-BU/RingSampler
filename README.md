@@ -48,7 +48,7 @@ series = {HotStorage '25}
 - `preprocess/`: Includes scripts to generate the required binary files (edges.bin, offset.bin, train_nodes.bin) for each dataset from raw text-based input.
 - `tests/`: Contains code to run RingSampler, performing multi-epoch GraphSAGE sampling on various datasets.
 - `scripts/`: Provides example scripts to run sampling on different datasets with configurable parameters.
-
+- `relatedWork`: Contains instructions and scripts for running baseline methods used for comparison in the paper.
 
 ### Download datasets
 - [ogbn-papers100M](https://ogb.stanford.edu/docs/nodeprop/#ogbn-papers100M)

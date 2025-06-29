@@ -37,9 +37,9 @@ See this DGL [guide](https://docs.dgl.ai/api/python/dgl.graphbolt.html#dataset) 
 
 ## Run
 
-```
-# make sure you correct the path to the datasets of the dataloders (`data_loader.py`) before you run
+Before running, make sure yotou correct the path to the datasets of the dataloders (`data_loader.py`)
 
+```
 # run DGL graphBolt Sampler
 python sampling-graphBolt.py --dataset --mode
 
