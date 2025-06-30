@@ -33,7 +33,7 @@ series = {HotStorage '25}
 
 - **Disk:** 4TB Samsung SSD
 
-- **GPU:**  NVIDIA A100 80GB GPU (not used in io_uring system)
+- **GPU:**  NVIDIA A100 80GB GPU (not used by RingSampler)
 
 
 #### Software
