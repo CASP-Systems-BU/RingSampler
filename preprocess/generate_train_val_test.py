@@ -2,10 +2,13 @@
 # then generate the train.bin, test.bin, valid.bin randomly for sampling.
 # The nodes in the bin files are stored as a list of uint_32
 
+# We're using the LiveJournal dataset as an example here
+# https://snap.stanford.edu/data/com-LiveJournal.html
+
 import numpy as np
 import os
 
-def generate_split_files(total_nodes, train_percent=0.01, valid_percent=0.005, test_percent=0.002, output_dir='/mnt/nvme2/yche-bin/small_64'):
+def generate_split_files(total_nodes, train_percent=0.01, valid_percent=0.005, test_percent=0.002, output_dir='/home/cc/LiveJournal'):
     # Calculate the number of nodes for each split
     num_train = int(total_nodes * train_percent)
     num_valid = int(total_nodes * valid_percent)
@@ -40,5 +43,5 @@ def generate_split_files(total_nodes, train_percent=0.01, valid_percent=0.005, t
     print(f'Train, valid, and test files generated in {output_dir}.')
 
 # Example usage
-total_nodes = 134217728  # Replace with the actual number of nodes
+total_nodes = 3997962  # Replace with the actual number of nodes
 generate_split_files(total_nodes)

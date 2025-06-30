@@ -1,10 +1,13 @@
-# this is used to preprocess synthetic graph
-# this file takes the original edges list txt file as input, 
+# this scrip takes the original edges list txt file as input, 
 # then generate the binary edges and offset files in the format we want 
+
+# We're using the LiveJournal dataset as an example here
+# https://snap.stanford.edu/data/com-LiveJournal.html
+
 import numpy as np
 import os
 
-def generate_edges_and_offsets(input_file, total_nodes, output_dir='/mnt/nvme2/yche-bin/small_64'):
+def generate_edges_and_offsets(input_file, total_nodes, output_dir='/home/cc/LiveJournal'):
     # Ensure the output directory exists
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -14,6 +17,8 @@ def generate_edges_and_offsets(input_file, total_nodes, output_dir='/mnt/nvme2/y
 
     with open(input_file, 'r') as f:
         for line in f:
+            if line.startswith('#') or line.strip() == '':
+                continue
             src, dst = map(int, line.split())
             edges.append(dst)
 
@@ -26,6 +31,8 @@ def generate_edges_and_offsets(input_file, total_nodes, output_dir='/mnt/nvme2/y
         current_node = -1
         edge_index = 0
         for line in f:
+            if line.startswith('#') or line.strip() == '':
+                continue
             src, _ = map(int, line.split())
             if src != current_node:
                 if current_node != -1:
@@ -49,6 +56,6 @@ def generate_edges_and_offsets(input_file, total_nodes, output_dir='/mnt/nvme2/y
     print(f'Number of edges: {len(edges)}, Number of offsets: {len(offsets)}')
 
 # Example usage
-input_file = '/mnt/nvme2/yche-bin/small_64/small_64.txt'  # Replace with the actual path to your file
-total_nodes = 134217728  # Replace with the actual number of nodes
+input_file = '/home/cc/LiveJournal/com-lj.ungraph.txt'  # Replace with the actual path to your file
+total_nodes = 34681189  # Replace with the actual number of nodes
 generate_edges_and_offsets(input_file, total_nodes)

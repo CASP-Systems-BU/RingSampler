@@ -16,10 +16,10 @@ find_library(RT_LIB rt)
 file(GLOB SOURCES "src/*.c")
 
 # Set the executable
-add_executable(main ${SOURCES})
+# add_executable(main ${SOURCES})
 
 # Link with pthread library
-target_link_libraries(main ${RT_LIB} ${IO_URING_LIBRARIES} pthread)
+# target_link_libraries(main ${RT_LIB} ${IO_URING_LIBRARIES} pthread)
 
 # Add CTest support
 enable_testing()

@@ -28,13 +28,9 @@ paths of needed files (in casper)
 #define FRIENDSTER_OFFSET_PATH "/mnt/nvme2/data/friendster/offsets.bin"
 #define FRIENDSTER_TRAIN_PATH "/mnt/nvme2/data/friendster/train_nodes.bin"
 
-#define SMALL_4_EDGE_PATH "/mnt/nvme2/yche-bin/small_4/edges.bin"
-#define SMALL_4_OFFSET_PATH "/mnt/nvme2/yche-bin/small_4/offset_64.bin"
-#define SMALL_4_TRAIN_PATH "/mnt/nvme2/yche-bin/small_4/train.bin"
-
-#define SMALL_64_EDGE_PATH "/mnt/nvme2/yche-bin/small_64/edges.bin"
-#define SMALL_64_OFFSET_PATH "/mnt/nvme2/yche-bin/small_64/offsets.bin"
-#define SMALL_64_TRAIN_PATH "/mnt/nvme2/yche-bin/small_64/train.bin"
+#define LIVE_JOURNAL_EDGE_PATH "/home/cc/LiveJournal/edges.bin"
+#define LIVE_JOURNAL_OFFSET_PATH "/home/cc/LiveJournal/offsets.bin"
+#define LIVE_JOURNAL_TRAIN_PATH "/home/cc/LiveJournal/train.bin"
 
 static int neighbor_size[3] = {20, 15, 10};
 

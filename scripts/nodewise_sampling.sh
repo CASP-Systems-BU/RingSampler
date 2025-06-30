@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # can be run by "sudo ../experiments/nodewise_sampling.sh"
-nodewise_sampler="/home/taliac/gnn-sampling/io_uring/build/test_multi_epoch"
+nodewise_sampler="/home/cc/RingSampler/build/test_multi_epoch"
 
 # nodewise_sampler takes inputs: <dataset> <QD> <num_threads> <epoch_num> <batch_size>
 # dataset: 
@@ -28,3 +28,6 @@ $nodewise_sampler papers 512 64 5 1024
 
 # run friendster
 $nodewise_sampler friendster 512 64 5 1024
+
+# run liveJournal
+$nodewise_sampler liveJournal 512 64 5 1024

@@ -36,19 +36,14 @@ int main(int argc, char *argv[]) {
         strcpy(offset_path, FRIENDSTER_OFFSET_PATH);
         strcpy(train_path, FRIENDSTER_TRAIN_PATH);
         training_nodes = 650000;
-    } else if (strcmp(dataset, "samll-4") == 0) {
-        strcpy(edge_path, SMALL_4_EDGE_PATH);
-        strcpy(offset_path, SMALL_4_OFFSET_PATH);
-        strcpy(train_path, SMALL_4_TRAIN_PATH);
-        training_nodes = 1342177;
-    } else if (strcmp(dataset, "samll-64") == 0) {
-        strcpy(edge_path, SMALL_64_EDGE_PATH);
-        strcpy(offset_path, SMALL_64_OFFSET_PATH);
-        strcpy(train_path, SMALL_64_TRAIN_PATH);
-        training_nodes = 1342177;
-    } else {
+    } else if (strcmp(dataset, "liveJournal") == 0) {
+        strcpy(edge_path, LIVE_JOURNAL_EDGE_PATH);
+        strcpy(offset_path, LIVE_JOURNAL_OFFSET_PATH);
+        strcpy(train_path, LIVE_JOURNAL_TRAIN_PATH);
+        training_nodes = 39979;
+    }  else {
         printf("Unknown dataset: %s\n", dataset);
-        printf("Available datasets: yahoo, papers, friendster, small-64, small-4\n");
+        printf("Available datasets: yahoo, papers, friendster, liveJournal\n");
         return 1;
     }
 
