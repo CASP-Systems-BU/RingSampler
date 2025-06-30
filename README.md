@@ -51,6 +51,7 @@ series = {HotStorage '25}
 - `relatedWork`: Contains instructions and scripts for running baseline methods used for comparison in the paper.
 
 ### Download datasets
+- [LiveJournal](https://snap.stanford.edu/data/com-LiveJournal.html): A relatively small dataset ideal for initial testing.
 - [ogbn-papers100M](https://ogb.stanford.edu/docs/nodeprop/#ogbn-papers100M)
 - [yahoo](https://webscope.sandbox.yahoo.com/catalog.php?datatype=&guccounter=1)
 - [Friendster](https://snap.stanford.edu/data/com-Friendster.html)
